@@ -65,113 +65,146 @@ st.markdown(f"""
         color: {colors['text']};
     }}
 
-    /* Mobile-first responsive design */
+    /* Mobile layout - maintain side-by-side structure like desktop */
     @media (max-width: 768px) {{
-        /* Force mobile layout */
+        /* Adjust container for mobile */
         .block-container {{
             max-width: 100% !important;
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
         }}
         
-        /* Keep columns side-by-side for grid, stack for main layout */
+        /* Keep columns side by side but adjust proportions */
+        [data-testid="column"] {{
+            min-width: 0 !important;
+            padding: 0 0.25rem !important;
+        }}
+        
+        /* Left column (Garden Planner) - 65% width */
         div[data-testid="column"]:first-child {{
-            width: 100% !important;
-            min-width: 100% !important;
-            margin-bottom: 2rem;
+            flex: 0 0 65% !important;
+            max-width: 65% !important;
         }}
         
+        /* Right column (Palette & Tools) - 35% width */
         div[data-testid="column"]:last-child {{
-            width: 100% !important;
-            min-width: 100% !important;
+            flex: 0 0 35% !important;
+            max-width: 35% !important;
         }}
         
-        /* Grid area: keep grid buttons in rows */
+        /* Grid row layout - keep horizontal */
         div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
             display: flex !important;
             flex-wrap: nowrap !important;
-            gap: 4px !important;
-            justify-content: center !important;
+            gap: 2px !important;
+            justify-content: space-between !important;
         }}
         
-        /* Make grid buttons square and touch-friendly */
+        /* Grid buttons - smaller but still touch-friendly */
         div[data-testid="column"]:first-child .stButton>button {{
-            min-height: 60px !important;
-            min-width: 60px !important;
-            max-width: 60px !important;
-            font-size: 20px !important;
-            margin: 2px !important;
+            min-height: 45px !important;
+            min-width: 45px !important;
+            max-width: 45px !important;
+            font-size: 16px !important;
+            margin: 1px !important;
             padding: 0 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
         }}
         
-        /* Palette area: stack palette buttons vertically */
+        /* Column/Row controls - smaller on mobile */
+        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"]:first-of-type .stButton>button,
+        div[data-testid="column"]:first-child .stNumberInput {{
+            font-size: 12px !important;
+        }}
+        
+        /* Palette buttons - vertical stack, smaller */
         div[data-testid="column"]:last-child .stButton>button {{
             width: 100% !important;
-            text-align: left !important;
-            justify-content: flex-start !important;
-            margin-bottom: 8px !important;
-            min-height: 50px !important;
+            text-align: center !important;
+            justify-content: center !important;
+            margin-bottom: 4px !important;
+            min-height: 35px !important;
+            font-size: 11px !important;
+            padding: 4px 8px !important;
         }}
         
-        /* Number input adjustments */
-        .stNumberInput {{
-            margin-bottom: 1rem;
-        }}
-        
-        /* File uploader improvements */
-        .stFileUploader {{
-            margin-bottom: 1rem;
-        }}
-        
-        /* Chat interface improvements */
-        .stTextInput {{
-            margin-bottom: 1rem;
-        }}
-        
-        /* Ensure text is readable */
-        .stMarkdown p, .stText {{
-            font-size: 14px !important;
-            line-height: 1.4 !important;
-        }}
-        
-        /* Header adjustments */
+        /* Adjust headings for mobile */
         h1 {{
-            font-size: 24px !important;
-            margin-bottom: 1rem !important;
+            font-size: 20px !important;
+            margin-bottom: 0.5rem !important;
         }}
         
         h2 {{
-            font-size: 20px !important;
-            margin-bottom: 0.8rem !important;
+            font-size: 16px !important;
+            margin-bottom: 0.5rem !important;
         }}
         
         h3 {{
-            font-size: 18px !important;
-            margin-bottom: 0.6rem !important;
+            font-size: 14px !important;
+            margin-bottom: 0.5rem !important;
+        }}
+        
+        /* Text adjustments */
+        .stMarkdown p, .stText {{
+            font-size: 12px !important;
+            line-height: 1.3 !important;
+        }}
+        
+        /* Form elements */
+        .stNumberInput {{
+            margin-bottom: 0.5rem !important;
+        }}
+        
+        .stFileUploader {{
+            margin-bottom: 0.5rem !important;
+        }}
+        
+        /* Selected plant indicator */
+        div[data-testid="column"]:last-child .stMarkdown {{
+            font-size: 10px !important;
         }}
     }}
 
-    /* Extra small screens */
+    /* Very small screens - adjust proportions */
     @media (max-width: 480px) {{
         .block-container {{
-            padding-left: 0.5rem !important;
-            padding-right: 0.5rem !important;
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
         }}
         
-        /* Smaller grid buttons for very small screens */
+        /* Slightly smaller grid buttons for very small screens */
         div[data-testid="column"]:first-child .stButton>button {{
-            min-height: 50px !important;
-            min-width: 50px !important;
-            max-width: 50px !important;
+            min-height: 38px !important;
+            min-width: 38px !important;
+            max-width: 38px !important;
+            font-size: 14px !important;
+        }}
+        
+        /* Even smaller palette buttons */
+        div[data-testid="column"]:last-child .stButton>button {{
+            min-height: 30px !important;
+            font-size: 10px !important;
+            padding: 2px 4px !important;
+        }}
+        
+        /* Tighter grid spacing */
+        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
+            gap: 1px !important;
+        }}
+        
+        /* Smaller text */
+        h1 {{
             font-size: 18px !important;
         }}
         
-        /* Keep grid layout intact */
-        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
-            gap: 2px !important;
+        h2 {{
+            font-size: 14px !important;
+        }}
+        
+        h3 {{
+            font-size: 12px !important;
         }}
     }}
 
