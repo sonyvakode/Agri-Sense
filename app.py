@@ -51,25 +51,149 @@ st.markdown(f"""
         background-color: {colors['button']};
         color: white;
         min-width: 80px;
+        border-radius: 8px;
+        border: none;
+        padding: 8px 16px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }}
+    .stButton>button:hover {{
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }}
     .stText, .stMarkdown {{
         color: {colors['text']};
     }}
 
-    /* Keep columns side-by-side even on mobile */
+    /* Mobile-first responsive design */
     @media (max-width: 768px) {{
+        /* Force mobile layout */
         .block-container {{
             max-width: 100% !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
         }}
+        
+        /* Stack columns vertically on mobile */
         [data-testid="column"] {{
-            min-width: 0 !important;
-            flex: 1 1 0px !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            flex: none !important;
+            margin-bottom: 1rem;
         }}
+        
         [data-testid="stHorizontalBlock"] {{
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
+            flex-direction: column !important;
+            gap: 1rem !important;
         }}
+        
+        /* Make grid buttons more touch-friendly */
+        .stButton>button {{
+            min-height: 50px !important;
+            min-width: 50px !important;
+            font-size: 18px !important;
+            margin: 2px !important;
+        }}
+        
+        /* Palette buttons full width on mobile */
+        div[data-testid="column"]:last-child .stButton>button {{
+            width: 100% !important;
+            text-align: left !important;
+            justify-content: flex-start !important;
+            margin-bottom: 8px !important;
+        }}
+        
+        /* Sidebar adjustments */
+        .css-1d391kg {{
+            width: 100% !important;
+        }}
+        
+        /* Number input adjustments */
+        .stNumberInput {{
+            margin-bottom: 1rem;
+        }}
+        
+        /* File uploader improvements */
+        .stFileUploader {{
+            margin-bottom: 1rem;
+        }}
+        
+        /* Chat interface improvements */
+        .stTextInput {{
+            margin-bottom: 1rem;
+        }}
+        
+        /* Ensure text is readable */
+        .stMarkdown p, .stText {{
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+        }}
+        
+        /* Header adjustments */
+        h1 {{
+            font-size: 24px !important;
+            margin-bottom: 1rem !important;
+        }}
+        
+        h2 {{
+            font-size: 20px !important;
+            margin-bottom: 0.8rem !important;
+        }}
+        
+        h3 {{
+            font-size: 18px !important;
+            margin-bottom: 0.6rem !important;
+        }}
+    }}
+
+    /* Extra small screens */
+    @media (max-width: 480px) {{
+        .block-container {{
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+        }}
+        
+        .stButton>button {{
+            min-height: 45px !important;
+            min-width: 45px !important;
+            font-size: 16px !important;
+        }}
+        
+        /* Make grid more compact */
+        div[data-testid="stHorizontalBlock"] > div {{
+            margin-right: 1px !important;
+        }}
+    }}
+
+    /* Improve grid layout for all screens */
+    .grid-container {{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 1rem;
+    }}
+    
+    .grid-row {{
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+    }}
+    
+    /* Enhanced visual feedback */
+    .stButton>button:active {{
+        transform: scale(0.95);
+    }}
+    
+    /* Improve spacing */
+    .stDivider {{
+        margin: 1.5rem 0;
+    }}
+    
+    /* File upload area improvements */
+    .uploadedFile {{
+        border-radius: 8px;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
     }}
     </style>
 """, unsafe_allow_html=True)
