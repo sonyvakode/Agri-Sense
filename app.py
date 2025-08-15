@@ -65,146 +65,41 @@ st.markdown(f"""
         color: {colors['text']};
     }}
 
-    /* Mobile layout - maintain side-by-side structure like desktop */
+    /* Keep columns side-by-side even on mobile */
     @media (max-width: 768px) {{
-        /* Adjust container for mobile */
         .block-container {{
             max-width: 100% !important;
-            padding-left: 0.5rem !important;
-            padding-right: 0.5rem !important;
         }}
-        
-        /* Keep columns side by side but adjust proportions */
         [data-testid="column"] {{
             min-width: 0 !important;
-            padding: 0 0.25rem !important;
+            flex: 1 1 0px !important;
         }}
-        
-        /* Left column (Garden Planner) - 65% width */
-        div[data-testid="column"]:first-child {{
-            flex: 0 0 65% !important;
-            max-width: 65% !important;
-        }}
-        
-        /* Right column (Palette & Tools) - 35% width */
-        div[data-testid="column"]:last-child {{
-            flex: 0 0 35% !important;
-            max-width: 35% !important;
-        }}
-        
-        /* Grid row layout - keep horizontal */
-        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
+        [data-testid="stHorizontalBlock"] {{
             display: flex !important;
             flex-wrap: nowrap !important;
-            gap: 2px !important;
-            justify-content: space-between !important;
+            overflow-x: auto !important;
         }}
         
-        /* Grid buttons - smaller but still touch-friendly */
-        div[data-testid="column"]:first-child .stButton>button {{
-            min-height: 45px !important;
-            min-width: 45px !important;
-            max-width: 45px !important;
-            font-size: 16px !important;
-            margin: 1px !important;
-            padding: 0 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }}
-        
-        /* Column/Row controls - smaller on mobile */
-        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"]:first-of-type .stButton>button,
-        div[data-testid="column"]:first-child .stNumberInput {{
-            font-size: 12px !important;
-        }}
-        
-        /* Palette buttons - vertical stack, smaller */
-        div[data-testid="column"]:last-child .stButton>button {{
-            width: 100% !important;
-            text-align: center !important;
-            justify-content: center !important;
-            margin-bottom: 4px !important;
-            min-height: 35px !important;
-            font-size: 11px !important;
-            padding: 4px 8px !important;
-        }}
-        
-        /* Adjust headings for mobile */
-        h1 {{
-            font-size: 20px !important;
-            margin-bottom: 0.5rem !important;
-        }}
-        
-        h2 {{
-            font-size: 16px !important;
-            margin-bottom: 0.5rem !important;
-        }}
-        
-        h3 {{
-            font-size: 14px !important;
-            margin-bottom: 0.5rem !important;
-        }}
-        
-        /* Text adjustments */
-        .stMarkdown p, .stText {{
-            font-size: 12px !important;
-            line-height: 1.3 !important;
-        }}
-        
-        /* Form elements */
-        .stNumberInput {{
-            margin-bottom: 0.5rem !important;
-        }}
-        
-        .stFileUploader {{
-            margin-bottom: 0.5rem !important;
-        }}
-        
-        /* Selected plant indicator */
-        div[data-testid="column"]:last-child .stMarkdown {{
-            font-size: 10px !important;
-        }}
-    }}
-
-    /* Very small screens - adjust proportions */
-    @media (max-width: 480px) {{
-        .block-container {{
-            padding-left: 0.25rem !important;
-            padding-right: 0.25rem !important;
-        }}
-        
-        /* Slightly smaller grid buttons for very small screens */
-        div[data-testid="column"]:first-child .stButton>button {{
-            min-height: 38px !important;
-            min-width: 38px !important;
-            max-width: 38px !important;
-            font-size: 14px !important;
-        }}
-        
-        /* Even smaller palette buttons */
-        div[data-testid="column"]:last-child .stButton>button {{
-            min-height: 30px !important;
-            font-size: 10px !important;
-            padding: 2px 4px !important;
-        }}
-        
-        /* Tighter grid spacing */
-        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
-            gap: 1px !important;
-        }}
-        
-        /* Smaller text */
-        h1 {{
+        /* Make grid buttons touch-friendly */
+        .stButton>button {{
+            min-height: 50px !important;
+            min-width: 50px !important;
             font-size: 18px !important;
         }}
         
-        h2 {{
-            font-size: 14px !important;
+        /* Palette buttons full width on mobile */
+        div[data-testid="column"]:last-child .stButton>button {{
+            width: 100% !important;
+            margin-bottom: 8px !important;
         }}
-        
-        h3 {{
-            font-size: 12px !important;
+    }}
+
+    /* Very small screens */
+    @media (max-width: 480px) {{
+        .stButton>button {{
+            min-height: 45px !important;
+            min-width: 45px !important;
+            font-size: 16px !important;
         }}
     }}
 
