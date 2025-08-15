@@ -74,38 +74,46 @@ st.markdown(f"""
             padding-right: 1rem !important;
         }}
         
-        /* Stack columns vertically on mobile */
-        [data-testid="column"] {{
+        /* Keep columns side-by-side for grid, stack for main layout */
+        div[data-testid="column"]:first-child {{
             width: 100% !important;
             min-width: 100% !important;
-            flex: none !important;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }}
         
-        [data-testid="stHorizontalBlock"] {{
-            flex-direction: column !important;
-            gap: 1rem !important;
+        div[data-testid="column"]:last-child {{
+            width: 100% !important;
+            min-width: 100% !important;
         }}
         
-        /* Make grid buttons more touch-friendly */
-        .stButton>button {{
-            min-height: 50px !important;
-            min-width: 50px !important;
-            font-size: 18px !important;
+        /* Grid area: keep grid buttons in rows */
+        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 4px !important;
+            justify-content: center !important;
+        }}
+        
+        /* Make grid buttons square and touch-friendly */
+        div[data-testid="column"]:first-child .stButton>button {{
+            min-height: 60px !important;
+            min-width: 60px !important;
+            max-width: 60px !important;
+            font-size: 20px !important;
             margin: 2px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }}
         
-        /* Palette buttons full width on mobile */
+        /* Palette area: stack palette buttons vertically */
         div[data-testid="column"]:last-child .stButton>button {{
             width: 100% !important;
             text-align: left !important;
             justify-content: flex-start !important;
             margin-bottom: 8px !important;
-        }}
-        
-        /* Sidebar adjustments */
-        .css-1d391kg {{
-            width: 100% !important;
+            min-height: 50px !important;
         }}
         
         /* Number input adjustments */
@@ -153,15 +161,17 @@ st.markdown(f"""
             padding-right: 0.5rem !important;
         }}
         
-        .stButton>button {{
-            min-height: 45px !important;
-            min-width: 45px !important;
-            font-size: 16px !important;
+        /* Smaller grid buttons for very small screens */
+        div[data-testid="column"]:first-child .stButton>button {{
+            min-height: 50px !important;
+            min-width: 50px !important;
+            max-width: 50px !important;
+            font-size: 18px !important;
         }}
         
-        /* Make grid more compact */
-        div[data-testid="stHorizontalBlock"] > div {{
-            margin-right: 1px !important;
+        /* Keep grid layout intact */
+        div[data-testid="column"]:first-child [data-testid="stHorizontalBlock"] {{
+            gap: 2px !important;
         }}
     }}
 
