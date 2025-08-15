@@ -2,7 +2,7 @@ import streamlit as st
 from utils import make_empty_grid, analyze_image, rule_based_reply, save_layout_json
 import os
 
-st.set_page_config(page_title='Agri-Sense', layout='wide', initial_sidebar_state='expanded',page_icon='🌿')
+st.set_page_config(page_title='Agri-Sense', layout='wide', initial_sidebar_state='expanded', page_icon='🌿')
 
 # --- Sidebar ---
 st.sidebar.title("Agri‑Sense 🌱")
@@ -50,9 +50,15 @@ st.markdown(f"""
     .stButton>button {{
         background-color: {colors['button']};
         color: white;
+        min-width: 80px;
     }}
     .stText, .stMarkdown {{
         color: {colors['text']};
+    }}
+    /* Prevent columns from stacking on small screens */
+    .css-1lcbmhc .stColumns {{
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -86,7 +92,7 @@ st.title("Agri‑Sense")
 st.markdown("A simple, attractive dual‑mode assistant for urban gardeners and rural farmers.")
 
 if mode == "Urban Mode":
-    col1, col2 = st.columns([3,1])
+    col1, col2 = st.columns([3,1], gap="small")
     with col1:
         st.subheader("Garden Planner (Visual)")
         cols_input, rows_input = st.columns(2)
@@ -121,8 +127,7 @@ if mode == "Urban Mode":
     with col2:
         st.subheader("Palette & Tools")
         for p in PLANTS:
-            if st.button(f"{p['emoji']}  {p['label']}", key=f"pal-{p['id']}", on_click=set_selected, args=(p['id'],)):
-                pass
+            st.button(f"{p['emoji']}  {p['label']}", key=f"pal-{p['id']}", on_click=set_selected, args=(p['id'],))
         st.markdown(f"**Selected:** {st.session_state.selected}")
 
         st.markdown('---')
@@ -135,7 +140,7 @@ if mode == "Urban Mode":
                 st.info(result)
 else:
     # Rural Mode
-    left, right = st.columns([1,2])
+    left, right = st.columns([1,2], gap="small")
     with left:
         st.subheader("Toolkit")
         if st.button("Pest Solutions"):
@@ -166,4 +171,3 @@ else:
                     st.rerun()
 
 st.markdown('---')
-
