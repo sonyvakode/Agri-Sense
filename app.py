@@ -5,8 +5,8 @@ import os
 st.set_page_config(page_title='Agri-Sense', layout='wide', initial_sidebar_state='expanded', page_icon='🌿')
 
 # --- Sidebar ---
-st.sidebar.title("Agri‑Sense 🌱")
-st.sidebar.markdown("Dual‑Mode Agri Assistant — Urban & Rural")
+st.sidebar.title("Agri-Sense 🌱")
+st.sidebar.markdown("Dual-Mode Agri Assistant — Urban & Rural")
 mode = st.sidebar.radio("Choose mode", ("Urban Mode", "Rural Mode"))
 
 st.sidebar.markdown('---')
@@ -55,10 +55,21 @@ st.markdown(f"""
     .stText, .stMarkdown {{
         color: {colors['text']};
     }}
-    /* Prevent columns from stacking on small screens */
-    .css-1lcbmhc .stColumns {{
-        flex-wrap: nowrap !important;
-        overflow-x: auto;
+
+    /* Keep columns side-by-side even on mobile */
+    @media (max-width: 768px) {{
+        .block-container {{
+            max-width: 100% !important;
+        }}
+        [data-testid="column"] {{
+            min-width: 0 !important;
+            flex: 1 1 0px !important;
+        }}
+        [data-testid="stHorizontalBlock"] {{
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+        }}
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -88,8 +99,8 @@ def set_selected(pid):
     st.session_state.selected = pid
 
 # --- Layout ---
-st.title("Agri‑Sense")
-st.markdown("A simple, attractive dual‑mode assistant for urban gardeners and rural farmers.")
+st.title("Agri-Sense")
+st.markdown("A simple, attractive dual-mode assistant for urban gardeners and rural farmers.")
 
 if mode == "Urban Mode":
     col1, col2 = st.columns([3,1], gap="small")
@@ -160,7 +171,7 @@ else:
             if msg['role']=='user':
                 st.markdown(f"**You:** {msg['text']}")
             else:
-                st.markdown(f"**Agri‑Sense:** {msg['text']}")
+                st.markdown(f"**Agri-Sense:** {msg['text']}")
         prompt = st.text_input("Ask a question", key='chat_input')
         if st.button("Send"):
             if prompt:
